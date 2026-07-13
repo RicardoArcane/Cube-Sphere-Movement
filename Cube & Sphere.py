@@ -2,13 +2,22 @@ import cv2
 import mediapipe as mp
 import math
 import numpy as np
+import sys
+import os
 
 from mediapipe.tasks import python
 from mediapipe.tasks.python import vision
 
 print("Starting...")
 
-model_path = "hand_landmarker.task"
+def resource_path(relative_path):
+    try:
+        base_path = sys._MEIPASS
+    except AttributeError:
+        base_path = os.path.abspath(".")
+    return os.path.join(base_path, relative_path)
+
+model_path = resource_path("hand_landmarker.task")
 
 BaseOptions = python.BaseOptions
 HandLandmarker = vision.HandLandmarker
